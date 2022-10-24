@@ -3,8 +3,8 @@ import styled from '@emotion/styled';
 
 export const Card = styled.div`
 position: relative;
-border: 2px dashed black;
-padding: 8px;
+border: ${props => `2px dashed ${props.theme.colors.black}`};
+padding: ${props => props.theme.spacing(5)};
 border-radius: 4px;
 `;
 
@@ -22,7 +22,7 @@ display: flex;
 align-items: center;
 margin-top: 0;
 margin-bottom: 8px;
-color: var(--color-primary-text);
+color: ${props => props.theme.colors.primaryText};
 font-size: 16px;
 line-height: 24px;
 font-weight: 400;
@@ -30,37 +30,37 @@ letter-spacing: 0.25px;
 
 &:hover,
 &:focus {
-    background-color: red;
+    background-color: ${props => props.theme.colors.red};
 }
 
 svg {
     display: block;
     margin-right: 8px;
-    color: var(--color-secondary-text);
+    color: ${props => props.theme.colors.secodaryText};
 }
 `;
-
-const setBgColor = props => {
-    switch (props.eventType) {
-        case 'free': 
-        return 'var(--color-green)';
-        case 'paid': 
-        return 'var(--color-blue)';
-        case 'vip':
-        return 'var(--color-red)';
-        default:
-        return '#0000';
-    }
-}
 
 
 export const Chip = styled.span`
 position: absolute;
 top: 4px;
 right: 4px;
-padding: 4px 8px;
+padding: ${props => props.theme.space[3]}px;
+
 border-radius: 4px;
 text-transform: uppercase;
-color: #fff;
-background-color: ${setBgColor}
+color: ${props => props.theme.colors.white};
+background-color: ${({eventType, theme}) => {
+
+    switch (eventType) {
+        case 'free': 
+        return theme.colors.green;
+        case 'paid': 
+        return theme.colors.blue;
+        case 'vip':
+        return theme.colors.red;
+        default:
+        return theme.colors.black;
+    }
+}};
 `
